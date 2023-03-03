@@ -21,7 +21,7 @@ class ProjectsTableSeeder extends Seeder
         for ($i = 0; $i < 50; $i++) {
             $newProject = new Project();
             $newProject->type_id = Type::inRandomOrder()->first()->id;
-            $newProject->title = $faker->sentence(5);
+            $newProject->title = $faker->realTextBetween(5, 15);
             $newProject->slug = Str::slug($newProject->title);
             $newProject->author = $faker->name();
             $newProject->languages_used = $faker->text(5);

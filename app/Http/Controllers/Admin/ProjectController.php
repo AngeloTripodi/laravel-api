@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -42,7 +44,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required',
+            'title' => ['required', 'unique:projects'],
             'languages_used' => 'required',
             'project_date' => 'required',
             'content' => 'required',
@@ -50,6 +52,7 @@ class ProjectController extends Controller
             'type_id' => 'required|exists:types,id'
         ]);
         $data['author'] = Auth::user()->name;
+        $data['slug'] = Str::slug($data['title']);
         $data['image'] = Storage::put('uploads', $data['image']);
         $newProject = new Project();
         $newProject->fill($data);
@@ -90,7 +93,7 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $data = $request->validate([
-            'title' => 'required',
+            'title' => ['required', Rule::unique('projects')->ignore($project->id)],
             'languages_used' => 'required',
             'project_date' => 'required',
             'content' => 'required',
