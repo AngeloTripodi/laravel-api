@@ -3,6 +3,7 @@
     @vite(['resources/js/popupDeleter.js'])
 @endsection
 
+
 @section('content')
     <div class="container">
 
@@ -27,13 +28,23 @@
                 <p class="card-text"> {{ $project->content }}</p>
                 <p></p>
                 <h6 class=" text-uppercase mb-4">{{ $project->languages_used }}</h6>
-                <a class="btn btn-sm btn-light" href="{{ route('admin.projects.edit', $project->id) }}">Edit</a>
+
+                @isset($previusProject)
+                    <a class="btn btn-sm btn-light" href="{{ route('admin.projects.show', $previusProject->slug) }}">Prev</a>
+                @endisset
+
+                <a class="btn btn-sm btn-light" href="{{ route('admin.projects.edit', $project->slug) }}">Edit</a>
                 <form class="d-inline-block popupDel" data-element-name="{{ $project->title }}"
-                    action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
+                    action="{{ route('admin.projects.destroy', $project->slug) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                 </form>
+
+                @isset($nextProject)
+                    <a class="btn btn-sm btn-light" href="{{ route('admin.projects.show', $nextProject->slug) }}">Next</a>
+                @endisset
+
             </div>
         </div>
 

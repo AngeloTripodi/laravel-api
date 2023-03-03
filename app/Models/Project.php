@@ -12,6 +12,17 @@ class Project extends Model
 
     protected $fillable = ['title', 'languages_used', 'project_date', 'content', 'author', 'image', 'type_id', 'slug'];
 
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+
     public function type()
     {
         return $this->belongsTo(Type::class);

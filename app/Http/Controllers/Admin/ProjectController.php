@@ -21,7 +21,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(20);
+        $projects = Project::orderBy('project_date', 'DESC')->paginate(20);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -69,7 +69,11 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('project'));
+        $previusProject = Project::where('project_date', '>', $project->project_date)->orderBy('project_date')->first();
+        $nextProject = Project::where('project_date', '<', $project->project_date)->orderBy('project_date', 'DESC')->first();
+
+
+        return view('admin.projects.show', compact('project', 'nextProject', 'previusProject'));
     }
 
     /**

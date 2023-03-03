@@ -38,11 +38,12 @@
                         {{-- <td>{{ $project->content }}</td> --}}
                         <td>{{ $project->project_date }}</td>
                         <td>
-                            <a class="btn btn-sm btn-light" href="{{ route('admin.projects.show', $project->id) }}">Show</a>
                             <a class="btn btn-sm btn-light"
-                                href="{{ route('admin.projects.edit', $project->id) }}">Edit</a>
+                                href="{{ route('admin.projects.show', $project->slug) }}">Show</a>
+                            <a class="btn btn-sm btn-light"
+                                href="{{ route('admin.projects.edit', $project->slug) }}">Edit</a>
                             <form class="d-inline-block popupDel" data-element-name="{{ $project->title }}"
-                                action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
+                                action="{{ route('admin.projects.destroy', $project->slug) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
