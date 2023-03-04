@@ -101,7 +101,16 @@ class ProjectController extends Controller
             'languages_used' => 'required',
             'project_date' => 'required',
             'content' => 'required',
+            'image' => 'required|image'
         ]);
+
+        if ($request->hasFile('image')) {
+            if ($project->isImageUrl()) {
+                Storage::delete($project->image);
+            }
+            $data['image'] = Storage::put('uploads', $data['image']);
+        }
+
         $project->update($data);
         return redirect()->route('admin.projects.show', compact('project'));
     }
@@ -114,7 +123,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        if (!str_starts_with($project->image, 'http')) {
+        if ($project->isImageUrl()) {
             Storage::delete($project->image);
         }
 

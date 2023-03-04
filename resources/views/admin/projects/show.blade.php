@@ -3,7 +3,6 @@
     @vite(['resources/js/popupDeleter.js'])
 @endsection
 
-
 @section('content')
     <div class="container">
 

@@ -38,7 +38,7 @@
     </div>
 
     <div class="mb-3">
-        <label for="project_date" class="form-label">Insert image:</label>
+        <label for="image" class="form-label">Insert image:</label>
         <input type="file" class="form-control" id="image" placeholder="file.jpg" name="image"
             value="{{ old('image', $project->image) }}">
     </div>
