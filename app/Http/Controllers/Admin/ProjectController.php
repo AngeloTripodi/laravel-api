@@ -101,7 +101,8 @@ class ProjectController extends Controller
             'languages_used' => 'required',
             'project_date' => 'required',
             'content' => 'required',
-            'image' => 'required|image'
+            'image' => 'required|image',
+            'type_id' => 'required|exists:types,id'
         ]);
 
         if ($request->hasFile('image')) {

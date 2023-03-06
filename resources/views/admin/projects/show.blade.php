@@ -19,7 +19,7 @@
                         #{{ $technology->name }}
                     @endforeach
                 </div>
-                @if (str_starts_with($project->image, 'http'))
+                @if ($project->isImageUrl())
                     <img class=" img-fluid" src="{{ $project->image }}" alt="{{ $project->title }}">
                 @else
                     <img class=" img-fluid" src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}">
