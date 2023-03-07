@@ -21,6 +21,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        // if (Auth::user()->roles()->pluck('id')->contains(3) || Auth::user()->roles()->pluck('id')->contains(2)) {
+        //     $projects = Project::orderBy('project_date', 'DESC')->paginate(20);
+        // } else {
+        //     $projects = Project::where('user_id', Auth::user()->id)->orderBy('project_date', 'DESC')->paginate(20);
+        // }
         $projects = Project::orderBy('project_date', 'DESC')->paginate(20);
         return view('admin.projects.index', compact('projects'));
     }
@@ -51,7 +56,7 @@ class ProjectController extends Controller
             'image' => 'required|image',
             'type_id' => 'required|exists:types,id'
         ]);
-        $data['author'] = Auth::user()->name;
+        $data['user_id'] = Auth::user()->id;
         $data['slug'] = Str::slug($data['title']);
         $data['image'] = Storage::put('uploads', $data['image']);
         $newProject = new Project();
