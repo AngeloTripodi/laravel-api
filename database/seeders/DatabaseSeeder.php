@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\UserDetail;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 
@@ -18,6 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TypeTableSeeder::class,
             TechnologySeeder::class,
+            UserSeeder::class,
+            UserDetailSeeder::class,
             RoleSeeder::class,
             RoleUserSeeder::class,
             ProjectsTableSeeder::class,

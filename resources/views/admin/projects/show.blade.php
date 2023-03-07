@@ -12,7 +12,7 @@
                 <div>Type: {{ $project->type->name }}</div>
             </div>
             <div class="card-body bg-black text-light">
-                <h2 class="card-author">{{ $project->author }}</h2>
+                <h2 class="card-author">{{ $project->user->name }}</h2>
                 <h5 class="card-title">{{ $project->title }}</h5>
                 <div>
                     @foreach ($project->technologies as $technology)

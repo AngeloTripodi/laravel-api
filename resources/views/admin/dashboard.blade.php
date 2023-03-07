@@ -14,6 +14,8 @@
                         Welcome,
                         {{ Auth::user()->name }}.
                         <p>{{ Auth::user()->email }}</p>
+                        <p> <img class="w-50" src="{{ Auth::user()->userDetail->profile_img }}" alt=""></p>
+                        <p>Status: {{ Auth::user()->userDetail->status }}</p>
                     </div>
                 </div>
             </div>

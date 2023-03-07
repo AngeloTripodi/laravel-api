@@ -10,7 +10,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'languages_used', 'project_date', 'content', 'author', 'image', 'type_id', 'slug'];
+    protected $fillable = ['title', 'languages_used', 'project_date', 'content', 'user_id', 'image', 'type_id', 'slug'];
 
     /**
      * Get the route key for the model.
@@ -36,5 +36,10 @@ class Project extends Model
     public function technologies()
     {
         return $this->belongsToMany(Technology::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
